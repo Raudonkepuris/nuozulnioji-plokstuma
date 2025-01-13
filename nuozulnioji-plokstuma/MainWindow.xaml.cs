@@ -12,15 +12,13 @@ namespace nuozulnioji_plokstuma
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly double _platformHeight;
-
         public String[] figures = { "Kvadratas", "Apskritimas" };
 
         public MainWindow()
         {
             InitializeComponent();
 
-            var initialAngle = (double)Resources["angle"];
+            var initialAngle = angle;
 
             angleLabel.Content = Math.Abs(initialAngle);
 
@@ -34,14 +32,16 @@ namespace nuozulnioji_plokstuma
             circleDiameterLabel.Visibility = Visibility.Hidden;
 
             figureImage.Source = new BitmapImage(new Uri("assets/kvadratas.png", UriKind.Relative));
-            figureImage.Width = (double)Resources["figureSize"];
+            figureImage.Width = figureSize;
 
-            figureSizeInput.Value = (double)Resources["figureSize"];
-            figureMassInput.Value = (double)Resources["figureMass"];
-            frictionCoefficientInput.Value = (double)Resources["frictionCoeficcient"];
-            platformLengthInput.Value = (double)Resources["platformLength"];
+            figureSizeInput.Value = figureSize;
+            figureMassInput.Value = figureMass;
+            frictionCoefficientInput.Value = frictionCoeficcient;
+            platformLengthInput.Value = platformLength;
 
-            _platformHeight = platform.ActualHeight;
+
+            AdjustFigureImagePosition();
+            updateLabel();
         }
 
         private void figureSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -86,23 +86,9 @@ namespace nuozulnioji_plokstuma
             }
         }
 
-        private void figureSizeInputChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            var curAngle = (double)this.FindResource("angle");
-            var curLeft = Canvas.GetLeft(figureImage);
-
-            var curTop = Canvas.GetTop(figureImage);
-            var curWidth = (double)Resources["figureSize"];
-            Resources["figureSize"] = ((DoubleUpDown)sender).Value;
-            figureImage.RenderTransformOrigin = new Point(1, 1);
-            figureImage.Width = (double)Resources["figureSize"];
-            Canvas.SetTop(figureImage, curTop + (curWidth - (double)Resources["figureSize"])/1.06);
-            Canvas.SetLeft(figureImage, curLeft + (curWidth - (double)Resources["figureSize"]));
-        }
-
         private void runSimulation(object sender, RoutedEventArgs e)
         {
-            var platformAngle = (double)this.FindResource("angle");
+            var platformAngle = angle;
             var platformWidth = platform.ActualWidth;
 
             var curFigureX = (platformWidth / 2) * Math.Cos(Math.Abs(platformAngle) * (Math.PI / 180));
@@ -122,68 +108,53 @@ namespace nuozulnioji_plokstuma
         {
             var angleDif = Convert.ToDouble(((Button)sender).Tag.ToString());
 
-            var newAngle = (double)this.FindResource("angle") + angleDif;
+            var newAngle = angle + angleDif;
 
             if (newAngle >= -40 && newAngle <= 0)
             {
-                Resources["angle"] = newAngle;
+                angle = newAngle;
                 angleLabel.Content = Math.Abs(newAngle);
 
-                var rotateTransform = new RotateTransform(newAngle, 0.5, 0.5);
+                var platformRotateTransform = new RotateTransform(newAngle, 0.5, 0);
+                var figureImageRotateTransform = new RotateTransform(newAngle, 1, 1);
 
-                var point = new transform
-
-                platform.RenderTransform = rotateTransform;
-                figureImage.RenderTransform = rotateTransform;
-
-                var platformWidth = platform.ActualWidth;
-
-                var curFigureLeft = Canvas.GetLeft(figureImage);
-                var curFigureTop = Canvas.GetTop(figureImage);
-
-                var curFigureX = (platformWidth / 2) * Math.Cos(Math.Abs(newAngle - angleDif) * (Math.PI / 180));
-                var curFigureY = (platformWidth / 2) * Math.Sin(Math.Abs(newAngle - angleDif) * (Math.PI / 180));
-
-                var newFigureX = (platformWidth / 2) * Math.Cos(Math.Abs(newAngle) * (Math.PI / 180));
-                var newFigureY = (platformWidth / 2) * Math.Sin(Math.Abs(newAngle) * (Math.PI / 180));
-
-                var newFigureLeft = curFigureLeft + (newFigureX - curFigureX);
-                var newFigureTop = curFigureTop - (newFigureY - curFigureY);
-
-                figureImage.RenderTransformOrigin = new Point(1, 1);
-                Canvas.SetTop(figureImage, newFigureTop);
-                Canvas.SetLeft(figureImage, newFigureLeft);
+                platform.RenderTransform = platformRotateTransform;
+                figureImage.RenderTransform = figureImageRotateTransform;       
             }
+
+            updateLabel();
+            AdjustFigureImagePosition();
         }
 
-        private void platformLengthInputChanged(object sender, EventArgs e)
+        private void figureSizeInputChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var newPlatformWidth = ((DoubleUpDown)sender).Value;
-            var curPlatformWidth = platform.ActualWidth;
+            var newWidth = (double)e.NewValue;
 
-            if(newPlatformWidth is not null && curPlatformWidth != 0)
+            if (figureSize != newWidth)
             {
-                var widthTransform = new ScaleTransform((double)newPlatformWidth / curPlatformWidth, 1, 0.5, 0.5);
-
-                platform.RenderTransform = widthTransform;
-
-                var platformAngle = (double)this.FindResource("angle");
-
-                RotateTransform rotateTransform = new RotateTransform(platformAngle, 0.5, 0.5);
-
-                platform.RenderTransform = rotateTransform;
-
-                //platform.Stretch = Stretch.Fill;
-                //platform.Width = (double)newPlatformWidth;
-                //var widthDif = newPlatformWidth - curPlatformWidth;
-                //var curPlatformLeft = Canvas.GetLeft(platform);
-                //var newPlatformLeft = curPlatformLeft - widthDif / 2;
-                //Canvas.SetLeft(platform, (double)newPlatformLeft);
-
-                //var curFigureLeft = Canvas.GetLeft(figureImage);
-                //var newFigureLeft = curFigureLeft + widthDif / 2;
-                //Canvas.SetLeft(figureImage, (double)newFigureLeft);
+                figureImage.Width = newWidth;
+                figureSize = newWidth;
             }
+
+            updateLabel();
+            AdjustFigureImagePosition();
+        }
+
+        private void platformLengthInputChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            var newLength = (double)e.NewValue;
+
+            if (platformLength != newLength)
+            {
+                platform.Width = newLength;
+
+                platformLeft = platformLeft - ((newLength - platformLength) / 2);
+
+                platformLength = newLength;
+            }
+
+            updateLabel();
+            AdjustFigureImagePosition();
         }
     }
 }
