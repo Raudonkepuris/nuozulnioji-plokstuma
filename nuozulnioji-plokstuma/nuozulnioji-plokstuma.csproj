@@ -10,7 +10,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\apskritimas.png" />
+    <None Remove="assets\arrow-anti-clock.png" />
+    <None Remove="assets\arrow-clock.png" />
+    <None Remove="assets\kvadratas.png" />
+    <None Remove="assets\platforma.png" />
+    <None Remove="assets\play.png" />
+    <None Remove="assets\tribometras.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="assets\apskritimas.png" />
+    <Resource Include="assets\arrow-anti-clock.png" />
+    <Resource Include="assets\arrow-clock.png" />
+    <Resource Include="assets\kvadratas.png" />
+    <Resource Include="assets\platforma.png" />
+    <Resource Include="assets\play.png" />
+    <Resource Include="assets\tribometras.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Assets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.1" />
   </ItemGroup>
 
 </Project>

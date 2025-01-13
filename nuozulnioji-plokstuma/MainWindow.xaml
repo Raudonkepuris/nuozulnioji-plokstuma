@@ -4,9 +4,80 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:nuozulnioji_plokstuma"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="Nuožulnioji plokštuma" Height="700" Width="1000">
+    <Window.Resources>
+        <sys:Double x:Key="angle">0</sys:Double>
+        <sys:String x:Key="figure">kvadratas</sys:String>
+        <sys:Double x:Key="figureSize">15</sys:Double>
+        <sys:Double x:Key="figureMass">0.2</sys:Double>
+        <sys:Double x:Key="frictionCoeficcient">0.5</sys:Double>
+        <sys:Double x:Key="platformLength">500</sys:Double>
+    </Window.Resources>
 
-    </Grid>
+    <Canvas>
+        <Canvas>
+            <Image Source="Assets/tribometras.png" Canvas.Left="410" Canvas.Top="213" HorizontalAlignment="Left" VerticalAlignment="Top" Width="387" Height="238"/>
+            <Image Name="platform" Source="Assets/platforma.png" Canvas.Left="247" Canvas.Top="241" HorizontalAlignment="Left" VerticalAlignment="Top" Width="500"></Image >
+
+            <Button Tag="1" Height="30" Width="30" Canvas.Left="784" Canvas.Top="350" Click="adjustAngle" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="assets/arrow-clock.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button Tag="-1" Height="30" Width="30" Canvas.Left="675" Canvas.Top="350" Click="adjustAngle" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="assets/arrow-anti-clock.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Label Name="angleLabel" Canvas.Left="740" Canvas.Top="355" Background="#dddddd" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+            <Image Name="figureImage" Width="15" Source="assets/kvadratas.png" MouseDown="toggleFigureSelection" Canvas.Left="732" Canvas.Top="227" HorizontalAlignment="Left" VerticalAlignment="Top"></Image >
+        </Canvas>
+
+        <Canvas>
+            <Label Content="Pasirinkti figurą" Canvas.Left="12" Canvas.Top="13" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <ComboBox Name="figureComboBox" SelectionChanged="figureSelectionChanged"  Canvas.Left="12" Canvas.Top="39" Width="100"></ComboBox>
+        </Canvas>
+
+        <Canvas Name="figureSizeCanvas">
+            <Label Name="squareLengthLabel" Content="Kvadrato kraštinės ilgis" Canvas.Left="150" Canvas.Top="13" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label Name="circleDiameterLabel" Content="Apskritimo diametras" Canvas.Left="150" Canvas.Top="13" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <xctk:DoubleUpDown Name="figureSizeInput" ValueChanged="figureSizeInputChanged" Minimum="15" Maximum="60" FormatString="N2" Width="100px" Canvas.Left="150" Canvas.Top="39"/>
+        </Canvas>
+
+        <Canvas Name="figureWeigthCavas">
+            <Label Content="Figūros masė" Canvas.Left="287" Canvas.Top="13" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <xctk:DoubleUpDown Name="figureMassInput" Minimum="0" FormatString="N2" Width="100px" Canvas.Left="287" Canvas.Top="39" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Canvas>
+
+        <Canvas>
+            <Button Height="30" Width="30" Canvas.Left="485" Canvas.Top="35" Click="runSimulation" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="assets/play.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Canvas>
+
+        <Canvas>
+            <Label Content="Platformos trinties koeficientas" Canvas.Left="12" Canvas.Top="60" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <xctk:DoubleUpDown Name="frictionCoefficientInput" Minimum="0" FormatString="N2" Width="100px" Canvas.Left="12" Canvas.Top="86" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        </Canvas>
+
+        <Canvas>
+            <Label Content="Platformos ilgis" Canvas.Left="12" Canvas.Top="105" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <xctk:DoubleUpDown Name="platformLengthInput" ValueChanged="platformLengthInputChanged" Minimum="400" Maximum="600" FormatString="N2" Width="100px" Canvas.Left="12" Canvas.Top="131" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        </Canvas>
+    </Canvas>
 </Window>
