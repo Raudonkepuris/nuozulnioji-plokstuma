@@ -20,8 +20,8 @@
 
     <Canvas>
         <Canvas>
-            <Image Source="Assets/tribometras.png" Canvas.Left="410" Canvas.Top="213" Width="387" Height="238"/>
-            <Image Name="platform" Source="Assets/platforma.png" Canvas.Left="247" Canvas.Top="241" Width="500" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" RenderTransformOrigin="0.5,0"></Image >
+            <Image Source="Assets/tribometer.png" Canvas.Left="410" Canvas.Top="213" Width="387" Height="238"/>
+            <Image Name="platform" Source="Assets/platform.png" Canvas.Left="247" Canvas.Top="241" Width="500" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" RenderTransformOrigin="0.5,0"></Image >
 
             <Button Tag="1" Height="30" Width="30" Canvas.Left="784" Canvas.Top="360" Click="adjustAngle">
                 <Button.Template>
@@ -44,7 +44,7 @@
             <Label Name="leftTopActualPlatformLabel" Canvas.Left="737" Canvas.Top="511" Background="#dddddd"/>
             <Label Name="leftTopFigureImageLabel" Canvas.Left="737" Canvas.Top="561" Background="#dddddd"/>
 
-            <Image Name="figureImage" Width="15" Source="assets/kvadratas.png" MouseDown="toggleFigureSelection" Canvas.Left="732" Canvas.Top="228" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="1, 1"></Image >
+            <Image Name="figureImage" Width="15" Source="Assets/square.png" MouseDown="toggleFigureSelection" Canvas.Left="732" Canvas.Top="228" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="1, 1"></Image >
         </Canvas>
 
         <Canvas>
