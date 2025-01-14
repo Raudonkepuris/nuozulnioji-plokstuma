@@ -2,8 +2,8 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using Xceed.Wpf.Toolkit;
 
 namespace nuozulnioji_plokstuma
 {
@@ -16,6 +16,7 @@ namespace nuozulnioji_plokstuma
 
         public MainWindow()
         {
+            // TODO: clean up
             InitializeComponent();
 
             var initialAngle = angle;
@@ -39,13 +40,13 @@ namespace nuozulnioji_plokstuma
             frictionCoefficientInput.Value = frictionCoeficcient;
             platformLengthInput.Value = platformLength;
 
-
             AdjustFigureImagePosition();
             updateLabel();
         }
 
         private void figureSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // TODO: refactor into factory pattern
             squareLengthLabel.Visibility = Visibility.Hidden;
             circleDiameterLabel.Visibility = Visibility.Hidden;
 
@@ -66,6 +67,7 @@ namespace nuozulnioji_plokstuma
 
         private void toggleFigureSelection(object sender, MouseButtonEventArgs e)
         {
+            // TODO: refactor into factory pattern
             squareLengthLabel.Visibility = Visibility.Hidden;
             circleDiameterLabel.Visibility = Visibility.Hidden;
 
@@ -129,11 +131,12 @@ namespace nuozulnioji_plokstuma
             storyboard.Children.Add(slideAnimationTop);
 
             storyboard.Begin();
-            
+
             AdjustFigureImagePosition();
             updateLabel();
         }
 
+        // TODO: move all the calculations to singletons
         private void adjustAngle(object sender, RoutedEventArgs e)
         {
             var angleDif = Convert.ToDouble(((Button)sender).Tag.ToString());
@@ -149,7 +152,7 @@ namespace nuozulnioji_plokstuma
                 var figureImageRotateTransform = new RotateTransform(newAngle, 1, 1);
 
                 platform.RenderTransform = platformRotateTransform;
-                figureImage.RenderTransform = figureImageRotateTransform;       
+                figureImage.RenderTransform = figureImageRotateTransform;
             }
 
             updateLabel();
