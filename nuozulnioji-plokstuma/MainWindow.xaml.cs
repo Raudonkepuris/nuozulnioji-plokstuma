@@ -88,20 +88,50 @@ namespace nuozulnioji_plokstuma
 
         private void runSimulation(object sender, RoutedEventArgs e)
         {
-            var platformAngle = angle;
-            var platformWidth = platform.ActualWidth;
+            var curFigureLeft = figureImageLeft;
+            var curFigureTop = figureImageTop;
 
-            var curFigureX = (platformWidth / 2) * Math.Cos(Math.Abs(platformAngle) * (Math.PI / 180));
-            var curFigureY = (platformWidth / 2) * Math.Sin(Math.Abs(platformAngle) * (Math.PI / 180));
+            var curFigureX = (platformLength / 2) * Math.Cos(Math.Abs(angle) * (Math.PI / 180));
+            var curFigureY = (platformLength / 2) * Math.Sin(Math.Abs(angle) * (Math.PI / 180));
 
-            var curFigureLeft = Canvas.GetLeft(figureImage);
-            var curFigureTop = Canvas.GetTop(figureImage);
+            var newFigureLeft = figureImageLeft - 2 * curFigureX;
+            var newFigureTop = figureImageTop + 2 * curFigureY;
 
-            var newFigureLeft = curFigureLeft - 2 * curFigureX;
-            var newFigureTop = curFigureTop + 2 * curFigureY;
+            var animationTime = 2; //seconds
+
+            // TODO: move somewhere else
+            // TODO: add actual calculation for slide/rotation times
+            DoubleAnimation slideAnimationLeft = new DoubleAnimation
+            {
+                From = figureImageLeft,
+                To = newFigureLeft,
+                Duration = new Duration(TimeSpan.FromSeconds(animationTime)),
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut },
+                FillBehavior = FillBehavior.Stop
+            };
+            DoubleAnimation slideAnimationTop = new DoubleAnimation
+            {
+                From = figureImageTop,
+                To = newFigureTop,
+                Duration = new Duration(TimeSpan.FromSeconds(animationTime)),
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut },
+                FillBehavior = FillBehavior.Stop
+            };
+
+            Storyboard.SetTarget(slideAnimationLeft, figureImage);
+            Storyboard.SetTargetProperty(slideAnimationLeft, new PropertyPath("(Canvas.Left)"));
+
+            Storyboard.SetTarget(slideAnimationTop, figureImage);
+            Storyboard.SetTargetProperty(slideAnimationTop, new PropertyPath("(Canvas.Top)"));
+
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(slideAnimationLeft);
+            storyboard.Children.Add(slideAnimationTop);
+
+            storyboard.Begin();
             
-            Canvas.SetLeft(figureImage, newFigureLeft);
-            Canvas.SetTop(figureImage, newFigureTop);
+            AdjustFigureImagePosition();
+            updateLabel();
         }
 
         private void adjustAngle(object sender, RoutedEventArgs e)
