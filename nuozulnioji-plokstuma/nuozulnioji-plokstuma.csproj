@@ -16,6 +16,7 @@
     <None Remove="assets\kvadratas.png" />
     <None Remove="assets\platforma.png" />
     <None Remove="assets\play.png" />
+    <None Remove="assets\reset.png" />
     <None Remove="assets\tribometras.png" />
   </ItemGroup>
 
@@ -26,6 +27,7 @@
     <Resource Include="assets\kvadratas.png" />
     <Resource Include="assets\platforma.png" />
     <Resource Include="assets\play.png" />
+    <Resource Include="assets\reset.png" />
     <Resource Include="assets\tribometras.png" />
   </ItemGroup>
 
