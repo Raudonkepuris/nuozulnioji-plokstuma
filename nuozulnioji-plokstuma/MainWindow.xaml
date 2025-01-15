@@ -8,22 +8,14 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="Nuožulnioji plokštuma" Height="700" Width="1000">
-    <Window.Resources>
-        <sys:Double x:Key="angle">0</sys:Double>
-        <sys:Double x:Key="figureSize">15</sys:Double>
-        <sys:Double x:Key="platformLength">500</sys:Double>
-        <sys:String x:Key="figure">kvadratas</sys:String>
-        <sys:Double x:Key="figureMass">0.2</sys:Double>
-        <sys:Double x:Key="frictionCoeficcient">0.5</sys:Double>
-    </Window.Resources>
-
+        Title="Nuožulnioji plokštuma" Height="500" Width="700">
     <Canvas>
         <Canvas>
-            <Image Source="Assets/tribometer.png" Canvas.Left="410" Canvas.Top="213" Width="387" Height="238"/>
-            <Image Name="platform" Source="Assets/platform.png" Canvas.Left="247" Canvas.Top="241" Width="500" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" RenderTransformOrigin="0.5,0"></Image >
+            <Image Source="Assets/tribometer.png" Canvas.Left="260" Canvas.Top="213" Width="387" Height="238"/>
+            <Image Name="platform" Source="Assets/platform.png" Canvas.Left="97" Canvas.Top="241" Width="500" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" RenderTransformOrigin="0.5,0"></Image >
+            <Image Name="figureImage" Width="15" Source="Assets/square.png" MouseDown="toggleFigureSelection" Canvas.Left="582" Canvas.Top="228" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="1, 1"></Image >
 
-            <Button Tag="1" Height="30" Width="30" Canvas.Left="784" Canvas.Top="360" Click="adjustAngle">
+            <Button Tag="1" Height="30" Width="30" Canvas.Left="634" Canvas.Top="360" Click="adjustAngle">
                 <Button.Template>
                     <ControlTemplate>
                         <Image Source="assets/arrow-clock.png"/>
@@ -31,7 +23,7 @@
                 </Button.Template>
             </Button>
 
-            <Button Tag="-1" Height="30" Width="30" Canvas.Left="674" Canvas.Top="360" Click="adjustAngle">
+            <Button Tag="-1" Height="30" Width="30" Canvas.Left="524" Canvas.Top="360" Click="adjustAngle">
                 <Button.Template>
                     <ControlTemplate>
                         <Image Source="assets/arrow-anti-clock.png"/>
@@ -39,12 +31,7 @@
                 </Button.Template>
             </Button>
 
-            <Label Name="angleLabel" Canvas.Left="737" Canvas.Top="361" Background="#dddddd"/>
-            <Label Name="leftTopPlatformLabel" Canvas.Left="737" Canvas.Top="461" Background="#dddddd"/>
-            <Label Name="leftTopActualPlatformLabel" Canvas.Left="737" Canvas.Top="511" Background="#dddddd"/>
-            <Label Name="leftTopFigureImageLabel" Canvas.Left="737" Canvas.Top="561" Background="#dddddd"/>
-
-            <Image Name="figureImage" Width="15" Source="Assets/square.png" MouseDown="toggleFigureSelection" Canvas.Left="732" Canvas.Top="228" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="1, 1"></Image >
+            <Label Name="angleLabel" Content="40" Canvas.Left="583" Canvas.Top="360" Background="#dddddd" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Canvas>
 
         <Canvas>
@@ -53,18 +40,18 @@
         </Canvas>
 
         <Canvas Name="figureSizeCanvas">
-            <Label Name="squareLengthLabel" Content="Kvadrato kraštinės ilgis" Canvas.Left="150" Canvas.Top="13"/>
-            <Label Name="circleDiameterLabel" Content="Apskritimo diametras" Canvas.Left="150" Canvas.Top="13"/>
+            <Label Name="squareLengthLabel" Content="Kvadrato kraštinės ilgis, mm" Canvas.Left="150" Canvas.Top="13"/>
+            <Label Name="circleDiameterLabel" Content="Apskritimo diametras, mm" Canvas.Left="150" Canvas.Top="13"/>
             <xctk:DoubleUpDown Name="figureSizeInput" ValueChanged="figureSizeInputChanged" Minimum="15" Maximum="60" FormatString="N2" Width="100px" Canvas.Left="150" Canvas.Top="39"/>
         </Canvas>
 
         <Canvas Name="figureWeigthCavas">
-            <Label Content="Figūros masė" Canvas.Left="287" Canvas.Top="13"/>
-            <xctk:DoubleUpDown Name="figureMassInput" Minimum="0" FormatString="N2" Width="100px" Canvas.Left="287" Canvas.Top="39" />
+            <Label Content="Figūros masė, g" Canvas.Left="320" Canvas.Top="13" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <xctk:DoubleUpDown Name="figureMassInput" Minimum="0" FormatString="N2" Width="100px" Canvas.Left="320" Canvas.Top="39" HorizontalAlignment="Left" VerticalAlignment="Center" />
         </Canvas>
 
         <Canvas>
-            <Button Height="30" Width="30" Canvas.Left="485" Canvas.Top="35" Click="runSimulation">
+            <Button Height="30" Width="30" Canvas.Left="330" Canvas.Top="104" Click="runSimulation" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Button.Template>
                     <ControlTemplate>
                         <Image Source="assets/play.png"/>
@@ -73,13 +60,15 @@
             </Button>
         </Canvas>
 
+        <Label Name="AnimationDurationLabel" Content="dfdsfds" Canvas.Left="265" Canvas.Top="409" Background="#dddddd" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
         <Canvas>
             <Label Content="Platformos trinties koeficientas" Canvas.Left="12" Canvas.Top="60"/>
-            <xctk:DoubleUpDown Name="frictionCoefficientInput" Minimum="0" FormatString="N2" Width="100px" Canvas.Left="12" Canvas.Top="86"/>
+            <xctk:DoubleUpDown Name="frictionCoefficientInput" ValueChanged="platformFrictionCoefficientChanged" Minimum="0" FormatString="N2" Width="100px" Canvas.Left="12" Canvas.Top="86"/>
         </Canvas>
 
         <Canvas>
-            <Label Content="Platformos ilgis" Canvas.Left="12" Canvas.Top="105"/>
+            <Label Content="Platformos ilgis, mm" Canvas.Left="12" Canvas.Top="105"/>
             <xctk:DoubleUpDown Name="platformLengthInput" ValueChanged="platformLengthInputChanged" Minimum="400" Maximum="600" FormatString="N2" Width="100px" Canvas.Left="12" Canvas.Top="131"/>
         </Canvas>
     </Canvas>

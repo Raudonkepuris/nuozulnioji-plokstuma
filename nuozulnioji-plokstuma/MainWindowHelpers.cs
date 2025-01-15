@@ -7,19 +7,17 @@ namespace nuozulnioji_plokstuma
     {
         private void updateLabel()
         {
-            leftTopPlatformLabel.Content = $"platform: {platformLeft} ; {platformTop}";
-            var (actualPlatformLeft, actualPlatformTop) = GetActualPlatformTopLeft();
-            leftTopActualPlatformLabel.Content = $"platform actual: {actualPlatformLeft} ; {actualPlatformTop}";
-            leftTopFigureImageLabel.Content = $"figure: {figureImageLeft} ; {figureImageTop}";
+            AnimationDurationLabel.Content = AnimationDuration == null ? 
+                                            "" : $"Slidimo laikas {AnimationDuration} ms";
         }
 
         private (double left, double top) GetActualPlatformTopLeft()
         {
-            var x = (platformLength / 2) * Math.Cos(Math.Abs(angle) * (Math.PI / 180));
-            var y = (platformLength / 2) * Math.Sin(Math.Abs(angle) * (Math.PI / 180));
+            var x = (PlatformWidth / 2) * Math.Cos(Math.Abs(figureObject.position.angle) * (Math.PI / 180));
+            var y = (PlatformWidth / 2) * Math.Sin(Math.Abs(figureObject.position.angle) * (Math.PI / 180));
 
-            var l = platformLeft + (platformLength / 2) + x;
-            var t = platformTop - y;
+            var l = PlatformLeft + (PlatformWidth / 2) + x;
+            var t = PlatformTop - y;
 
             l = Math.Round(l, 2);
             t = Math.Round(t, 2);
@@ -31,11 +29,13 @@ namespace nuozulnioji_plokstuma
         {
             var (platformLeft, platformTop) = GetActualPlatformTopLeft();
 
-            var figureImageAdjustedLeft = platformLeft - figureImage.ActualWidth;
-            var figureImageAdjustedTop = platformTop - figureImage.ActualHeight;
+            var (figureImageAdjustedLeft, figureImageAdjustedTop) = figureObject.GetAccurateFigurePosition(platformLeft, platformTop);
 
-            figureImageLeft = figureImageAdjustedLeft;
-            figureImageTop = figureImageAdjustedTop;
+            figureObject.position.left = figureImageAdjustedLeft;
+            figureObject.position.top = figureImageAdjustedTop;
+
+            Canvas.SetLeft(figureImage, figureObject.position.left);
+            Canvas.SetTop(figureImage, figureObject.position.top);
 
             return (figureImageAdjustedLeft, figureImageAdjustedTop);
         }

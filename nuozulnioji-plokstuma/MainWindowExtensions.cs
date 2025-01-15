@@ -5,56 +5,32 @@ namespace nuozulnioji_plokstuma
 {
     public partial class MainWindow : Window
     {
-        public double angle
+        public double PlatformWidth
         {
-            get { return Resources["angle"] is double angle ? angle : 0; }
-            set { Resources["angle"] = value; }
+            get { return platform.Width; }
+            set { platform.Width = value; }
         }
-        public double figureSize
+        private double _frictionCoefficient;
+        public double FrictionCoeficcient
         {
-            get { return Resources["figureSize"] is double angle ? angle : 0; }
-            set { Resources["figureSize"] = value; }
+            get { return _frictionCoefficient; }
+            set { _frictionCoefficient = value; }
         }
-        public double platformLength
-        {
-            get { return Resources["platformLength"] is double angle ? angle : 0; }
-            set { Resources["platformLength"] = value; }
-        }
-        public double figure
-        {
-            get { return Resources["figure"] is double angle ? angle : 0; }
-            set { Resources["figure"] = value; }
-        }
-        public double figureMass
-        {
-            get { return Resources["figureMass"] is double angle ? angle : 0; }
-            set { Resources["figureMass"] = value; }
-        }
-        public double frictionCoeficcient
-        {
-            get { return Resources["frictionCoeficcient"] is double angle ? angle : 0; }
-            set { Resources["frictionCoeficcient"] = value; }
-        }
-
-        public double platformTop
+        public double PlatformTop
         {
             get { return Canvas.GetTop(platform); }
             set { Canvas.SetTop(platform, value); }
         }
-        public double platformLeft
+        public double PlatformLeft
         {
             get { return Canvas.GetLeft(platform); }
             set { Canvas.SetLeft(platform, value); }
         }
-        public double figureImageTop
+        private long? _animationDuration;
+        public long? AnimationDuration
         {
-            get { return Canvas.GetTop(figureImage); }
-            set { Canvas.SetTop(figureImage, value); }
-        }
-        public double figureImageLeft
-        {
-            get { return Canvas.GetLeft(figureImage); }
-            set { Canvas.SetLeft(figureImage, value); }
+            get { return _animationDuration; }
+            set { _animationDuration = value; }
         }
     }
 }
