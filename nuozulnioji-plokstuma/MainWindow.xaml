@@ -31,7 +31,7 @@
                 </Button.Template>
             </Button>
 
-            <Label Name="angleLabel" Content="40" Canvas.Left="583" Canvas.Top="360" Background="#dddddd" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Name="angleLabel" Canvas.Left="583" Canvas.Top="360" Background="#dddddd" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Canvas>
 
         <Canvas>
@@ -60,7 +60,7 @@
             </Button>
         </Canvas>
 
-        <Label Name="AnimationDurationLabel" Content="dfdsfds" Canvas.Left="265" Canvas.Top="409" Background="#dddddd" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <Label Name="AnimationDurationLabel" Canvas.Left="265" Canvas.Top="409" Background="#dddddd" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
         <Canvas>
             <Label Content="Platformos trinties koeficientas" Canvas.Left="12" Canvas.Top="60"/>

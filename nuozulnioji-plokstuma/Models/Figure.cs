@@ -2,13 +2,18 @@
 {
     public abstract class Figure
     {
-        protected const double g = 9.81;
+        protected readonly double g;
 
         public string name;
         public string source;
         public Position position;
 
-        private Figure(string _name, string _source)
+        protected Figure()
+        {
+            g = 9.81;
+        }
+
+        private Figure(string _name, string _source) : this()
         {
             name = _name;
             source = _source;

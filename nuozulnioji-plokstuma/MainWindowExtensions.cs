@@ -26,7 +26,7 @@ namespace nuozulnioji_plokstuma
             get { return Canvas.GetLeft(platform); }
             set { Canvas.SetLeft(platform, value); }
         }
-        private long? _animationDuration;
+        private long? _animationDuration = default;
         public long? AnimationDuration
         {
             get { return _animationDuration; }

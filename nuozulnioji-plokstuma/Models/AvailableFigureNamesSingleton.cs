@@ -40,7 +40,7 @@ namespace nuozulnioji_plokstuma.Models
         private string[] CalculateArray()
         {
             var arrLength = Enum.GetValues(typeof(Figures)).Length;
-            var array = new string[arrLength];
+            var array = new String[arrLength];
             int index = 0;
 
             foreach (Figures figure in Enum.GetValues(typeof(Figures)))

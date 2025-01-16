@@ -8,6 +8,7 @@ namespace nuozulnioji_plokstuma.Models
         private const string SOURCE = "Assets/square.png";
         private const int DEFAULT_POSITION_PARAM = 0;
 
+        [Obsolete]
         public Square() : base(NAME, SOURCE, DEFAULT_POSITION_PARAM, DEFAULT_POSITION_PARAM, DEFAULT_POSITION_PARAM, DEFAULT_POSITION_PARAM, DEFAULT_POSITION_PARAM) { }
 
         public Square(Position position) : base(NAME, SOURCE, position) { }
@@ -24,7 +25,6 @@ namespace nuozulnioji_plokstuma.Models
             }
             else
             {
-                // TODO: make exception a specific one, new exception class
                 throw new AccelerationException("Padidink kampą arba sumažink trinties koeficientą, kad kvadratas galėtų slysti.");
             }
         }

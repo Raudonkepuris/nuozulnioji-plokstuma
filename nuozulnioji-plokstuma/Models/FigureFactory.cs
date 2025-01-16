@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using nuozulnioji_plokstuma.Attrubutes;
 using nuozulnioji_plokstuma.Models;
+using nuozulnioji_plokstuma.Attrubutes;
 
 namespace nuozulnioji_plokstuma.Models
 {
+    [FactoryAttribute("Factory klasė")]
+
     public static class FigureFactory
     {
         public static Figure GetFigure(Figures figure, Position position)
