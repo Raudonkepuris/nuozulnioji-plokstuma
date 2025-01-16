@@ -14,6 +14,7 @@
             <MenuItem Header="File">
                 <MenuItem Header="Saugoti" Click="SaveClick"/>
                 <MenuItem Header="Įkelti iš failo" Click="LoadClick"/>
+                <MenuItem Header="Įkelti iš nuorodos" Click="LoadFromUrlClick"/>
                 <MenuItem Header="Išeiti" Click="ExitClick"/>
             </MenuItem>
         </Menu>

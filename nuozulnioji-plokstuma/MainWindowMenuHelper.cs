@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
@@ -93,6 +94,69 @@ namespace nuozulnioji_plokstuma
                 {
                     MessageBox.Show($"Klaida atidarant failą: {ex.Message}");
                 }
+            }
+        }
+
+        private async void LoadFromUrlClick(object sender, RoutedEventArgs e)
+        {
+            var urlInputDialog = new UrlInpuWindow();
+
+            if (urlInputDialog.ShowDialog() == true)
+            {
+                string url = urlInputDialog.Url;
+
+                try
+                {
+                    string json = await DownloadJsonFromUrl(url);
+
+                    FileData data = JsonConvert.DeserializeObject<FileData>(json);
+
+                    var oldImageWidth = figureObject.position.width;
+                    FixImageSize(oldImageWidth, data.FigureWidth);
+
+                    var position = new Position
+                    {
+                        left = data.FigureLeft,
+                        top = data.FigureTop,
+                        angle = data.Angle,
+                        width = data.FigureWidth,
+                        mass = data.FigureMass
+                    };
+
+                    Figures figure = data.FigureName == "Kvadratas" ? Figures.Square : Figures.Circle;
+
+                    figureObject = FigureFactory.GetFigure(figure, position);
+
+                    angleLabel.Content = Math.Abs(data.Angle);
+                    angleBtnUp.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    angleBtnDown.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+
+                    figureSizeInput.Value = data.FigureWidth;
+                    figureMassInput.Value = data.FigureMass;
+                    frictionCoefficientInput.Value = data.PlatformFrictionCoefficient;
+                    platformLengthInput.Value = data.PlatformLength;
+
+                    MessageBox.Show($"Failas nuskaitytas! {data.ToString()}");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Klaida atsisiunčiant arba apdorojant failą: {ex.Message}");
+                }
+            }
+        }
+
+        private async Task<string> DownloadJsonFromUrl(string url)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"HTTP klaida: {response.StatusCode}");
+                }
+
+                return await response.Content.ReadAsStringAsync();
             }
         }
 
