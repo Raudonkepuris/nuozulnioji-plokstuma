@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace nuozulnioji_plokstuma.Models
 {
     /// <summary>
-    /// Klasė kuri suranda visų galimų figurų tipų pavadinimus.
+    /// Singelton tipo klasė kuri suranda visų galimų figurų tipų pavadinimus.
     /// </summary>
     public class AvailableFigureNamesSingleton
     {
