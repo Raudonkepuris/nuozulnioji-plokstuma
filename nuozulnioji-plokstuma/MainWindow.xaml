@@ -10,12 +10,20 @@
         WindowStartupLocation="CenterScreen"
         Title="Nuožulnioji plokštuma" Height="500" Width="700">
     <Canvas>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="Saugoti" Click="SaveClick"/>
+                <MenuItem Header="Įkelti iš failo" Click="LoadClick"/>
+                <MenuItem Header="Išeiti" Click="ExitClick"/>
+            </MenuItem>
+        </Menu>
+
         <Canvas>
             <Image Source="Assets/tribometer.png" Canvas.Left="260" Canvas.Top="213" Width="387" Height="238"/>
             <Image Name="platform" Source="Assets/platform.png" Canvas.Left="97" Canvas.Top="241" Width="500" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" RenderTransformOrigin="0.5,0"></Image >
             <Image Name="figureImage" Width="15" Source="Assets/square.png" MouseDown="toggleFigureSelection" Canvas.Left="582" Canvas.Top="228" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="1, 1"></Image >
 
-            <Button Tag="1" Height="30" Width="30" Canvas.Left="634" Canvas.Top="360" Click="adjustAngle">
+            <Button Name="angleBtnUp" Tag="1" Height="30" Width="30" Canvas.Left="634" Canvas.Top="360" Click="adjustAngle">
                 <Button.Template>
                     <ControlTemplate>
                         <Image Source="assets/arrow-clock.png"/>
@@ -23,7 +31,7 @@
                 </Button.Template>
             </Button>
 
-            <Button Tag="-1" Height="30" Width="30" Canvas.Left="524" Canvas.Top="360" Click="adjustAngle">
+            <Button Name="angleBtnDown" Tag="-1" Height="30" Width="30" Canvas.Left="524" Canvas.Top="360" Click="adjustAngle">
                 <Button.Template>
                     <ControlTemplate>
                         <Image Source="assets/arrow-anti-clock.png"/>

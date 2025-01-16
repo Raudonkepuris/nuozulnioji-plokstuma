@@ -49,7 +49,7 @@ namespace nuozulnioji_plokstuma
                 frictionCoefficientInput.Value = FrictionCoeficcient;
                 platformLengthInput.Value = platform.Width;
 
-                var comboBoxItemsSource = (AvailableFigureNamesSingleton.Instance).CalculatedArray;
+                string[] comboBoxItemsSource = (AvailableFigureNamesSingleton.Instance).CalculatedArray;
                 figureComboBox.ItemsSource = comboBoxItemsSource;
                 figureComboBox.SelectedIndex = Array.IndexOf(comboBoxItemsSource, "Kvadratas");
 

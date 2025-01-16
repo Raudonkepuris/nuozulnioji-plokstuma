@@ -5,6 +5,9 @@
     /// </summary>
     public abstract class Figure
     {
+        /// <summary>
+        /// Laisvasis kritimo pagreitis.
+        /// </summary>
         protected readonly double g;
 
         /// <summary>
@@ -57,7 +60,7 @@
         /// Konstruktorius kviečiamas kai figūros pozicija paduodama <see cref="Position"/> klasės pavidalu.
         /// </summary>
         /// <param name="_name">Figūros pavadinimas.</param>
-        /// <param name="_source">Figūros šaltinio vieta./param>
+        /// <param name="_source">Figūros šaltinio vieta.</param>
         /// <param name="_position">Figūros pozicija</param>
         protected Figure(string _name, string _source, Position _position) : this(_name, _source)
         {

@@ -10,7 +10,7 @@ namespace nuozulnioji_plokstuma.Attributes
     {
         /// <summary>
         /// Parametras paaiškinimui. 
-        /// </summary
+        /// </summary>
         public string Description { get; }
 
         /// <summary>

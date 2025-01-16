@@ -1,4 +1,6 @@
-﻿using nuozulnioji_plokstuma.Exceptions;
+﻿using System.Windows.Controls;
+using System.Xml.Linq;
+using nuozulnioji_plokstuma.Exceptions;
 
 namespace nuozulnioji_plokstuma.Models
 {
@@ -44,6 +46,15 @@ namespace nuozulnioji_plokstuma.Models
             {
                 throw new AccelerationException("Padidink kampą arba sumažink trinties koeficientą, kad kvadratas galėtų slysti.");
             }
+        }
+
+        /// <summary>
+        /// Funckija grąžinanti pagrindinius kvadrato parametrus
+        /// </summary>
+        /// <returns>Pagrindiniai kvadrato parametrai string formatu</returns>
+        public override string ToString()
+        {
+            return $"Name: {NAME}; Src: {SOURCE}; Left: {base.position.left}; Top: {base.position.top}; Angle: {base.position.angle}";
         }
 
     }
