@@ -11,13 +11,16 @@ using static System.Net.Mime.MediaTypeNames;
 namespace nuozulnioji_plokstuma
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// <see cref="MainWindow"/> lango veikimo logika.
     /// </summary>
     public partial class MainWindow : Window
     {
         private const int INTIIAL_ANGLE = 0;
         private Figure figureObject;
 
+        /// <summary>
+        /// Numatytasis konstruktorius inicijuojantis <see cref="MainWindow"/> langą.
+        /// </summary>
         public MainWindow()
         {
             // TODO: clean up

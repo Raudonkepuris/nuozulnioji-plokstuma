@@ -2,17 +2,34 @@
 
 namespace nuozulnioji_plokstuma.Models
 {
+    /// <summary>
+    /// Kvadrato figūros klasė.
+    /// </summary>
     public class Square : Figure
     {
         private const string NAME = "Kvadratas";
         private const string SOURCE = "Assets/square.png";
         private const int DEFAULT_POSITION_PARAM = 0;
 
+        /// <summary>
+        /// Numatytasis konstruktorius kai kvadrato figūros objektas yra kuriamas be parametrų.
+        /// </summary>
         [Obsolete]
         public Square() : base(NAME, SOURCE, DEFAULT_POSITION_PARAM, DEFAULT_POSITION_PARAM, DEFAULT_POSITION_PARAM, DEFAULT_POSITION_PARAM, DEFAULT_POSITION_PARAM) { }
 
+        /// <summary>
+        /// Konstruktorius kai kvadrato figūros objektas kuriamas su <paramref name="position"/> parametru.
+        /// </summary>
+        /// <param name="position">Turi nurodyti dabartinę figūros poziciją.</param>
+
         public Square(Position position) : base(NAME, SOURCE, position) { }
 
+        /// <summary>
+        /// Metodas grąžinantis figūros slidimo laiką milisekundėm.
+        /// </summary>
+        /// <param name="frictionCoefficient">Platformos trinties koeficientas.</param>
+        /// <param name="platformWidth">Platformos ilgis</param>
+        /// <returns>Figūros slydimo trukmę.</returns>
         public override long AnimationTime(double frictionCoefficient, double platformWidth)
         {
             var angleRad = Math.PI * Math.Abs(position.angle) / 180.0;

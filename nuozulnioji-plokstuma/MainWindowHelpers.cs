@@ -3,6 +3,9 @@ using System.Windows.Controls;
 
 namespace nuozulnioji_plokstuma
 {
+    /// <summary>
+    /// Dalinė klasė pagalbiniams <see cref="MainWindow"/> metodams.
+    /// </summary>
     public partial class MainWindow : Window
     {
         private void updateLabel()

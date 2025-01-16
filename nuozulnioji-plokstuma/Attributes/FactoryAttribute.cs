@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace nuozulnioji_plokstuma.Attrubutes
+namespace nuozulnioji_plokstuma.Attributes
 {
     /// <summary>
     ///  Aiškinimo klasė "Simple factory pattern klasėm" 
